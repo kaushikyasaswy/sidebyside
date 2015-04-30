@@ -12,6 +12,12 @@ database : config.db_database
 
 //Function to display the price range page
 function show(req, res, email, plan) {
+	var yelp = require("yelp").createClient({
+	  consumer_key: "wMfCFcqTj2FLaybsGPzytQ", 
+	  consumer_secret: "7U5KhSvKp0evucyb5-ltXtwEW68",
+	  token: "Hu_4wJgfcjPrhrObMvqYyddAlQkJ-yD2",
+	  token_secret: "t_S08LdIEw5v6-Yw-dJXQiZXUh4"
+	});
 	var connection_pool = mysql.createPool(connection_data);
 	connection_pool.getConnection(function(err, connection) {
 		if (err) {
@@ -19,7 +25,7 @@ function show(req, res, email, plan) {
 			res.render('errorPage.ejs', {message: 'unable to connect to database at this time'});
 			return;
 		}
-		connection.query("select * from Customer_plans where email='" + email + "' and plan='" + plan + "'", function(err, rows, fields) {
+		connection.query("select * from Customer_plans where email='" + email + "' and plan_name='" + plan + "'", function(err, rows, fields) {
 			if (!err) {
 				if (rows.length == 0) {
 					res.render('errorPage.ejs', {message: 'user not logged in'});
@@ -55,114 +61,124 @@ function show(req, res, email, plan) {
 						connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.state = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_divey = '1'", function(err, results1, fields) {
 							if (!err) {
 								divey_restaurants = results1.length;
+								connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.state = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_classy = '1'", function(err, results2, fields) {
+									if (!err) {
+										classy_restaurants = results2.length;
+										connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.state = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_touristy = '1'", function(err, results3, fields) {
+											if (!err) {
+												touristy_restaurants = results3.length;
+												connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.state = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_hipster = '1'", function(err, results4, fields) {
+													if (!err) {
+														hipster_restaurants = results4.length;
+														connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.state = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_trendy = '1'", function(err, results5, fields) {
+															if (!err) {
+																trendy_restaurants = results5.length;
+																connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.state = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_intimate = '1'", function(err, results6, fields) {
+																	if (!err) {
+																		intimate_restaurants = results6.length;
+																		connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.state = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_casual = '1'", function(err, results7, fields) {
+																			if (!err) {
+																				casual_restaurants = results7.length;
+																				connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.state = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_romance = '1'", function(err, results8, fields) {
+																					if (!err) {
+																						romance_restaurants = results8.length;
+																						connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.state = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_upscale = '1'", function(err, results9, fields) {
+																							if (!err) {
+																								upscale_restaurants = results9.length;
+																								var divey_r = divey_restaurants/total_restaurants;
+																								var classy_r = classy_restaurants/total_restaurants;
+																								var touristy_r = touristy_restaurants/total_restaurants;
+																								var hipster_r = hipster_restaurants/total_restaurants;
+																								var trendy_r = trendy_restaurants/total_restaurants;
+																								var intimate_r = intimate_restaurants/total_restaurants;
+																								var casual_r = casual_restaurants/total_restaurants;
+																								var romance_r = romance_restaurants/total_restaurants;
+																								var upscale_r = upscale_restaurants/total_restaurants;
+																								yelp.search({sort: "2", limit: "5", location: "Philadelphia", category_filter: "isps"}, function(error, data) {
+																								    var businesses = [];
+																									for (var i=0; i < 5; i++) {
+																										var name = data.businesses[i].name;
+																										var phone = data.businesses[i].display_phone;
+																										var url = data.businesses[i].url;
+																										var business = [name, phone, url];
+																										businesses.push(business);
+																									}
+																									res.render('ambiencePage.ejs', {name: req.session.name, plan: plan, bardata: [divey_r, classy_r, touristy_r, hipster_r, trendy_r, intimate_r, casual_r, romance_r, upscale_r], businesses: businesses});
+																									return;
+																								});
+																							}
+																							else {
+																								console.error('[ambience.js] : Error querying table : ' + err.stack);
+																								res.render('errorPage.ejs', {message: 'Unable to query database at this time'});
+																								return;
+																							}
+																						});
+																					}
+																					else {
+																						console.error('[ambience.js] : Error querying table : ' + err.stack);
+																						res.render('errorPage.ejs', {message: 'Unable to query database at this time'});
+																						return;
+																					}
+																				});
+																			}
+																			else {
+																				console.error('[ambience.js] : Error querying table : ' + err.stack);
+																				res.render('errorPage.ejs', {message: 'Unable to query database at this time'});
+																				return;
+																			}
+																		});
+																	}
+																	else {
+																		console.error('[ambience.js] : Error querying table : ' + err.stack);
+																		res.render('errorPage.ejs', {message: 'Unable to query database at this time'});
+																		return;
+																	}
+																});
+															}
+															else {
+																console.error('[ambience.js] : Error querying table : ' + err.stack);
+																res.render('errorPage.ejs', {message: 'Unable to query database at this time'});
+																return;
+															}
+														});
+													}
+													else {
+														console.error('[ambience.js] : Error querying table : ' + err.stack);
+														res.render('errorPage.ejs', {message: 'Unable to query database at this time'});
+														return;
+													}
+												});
+											}
+											else {
+												console.error('[ambience.js] : Error querying table : ' + err.stack);
+												res.render('errorPage.ejs', {message: 'Unable to query database at this time'});
+												return;
+											}
+										});
+									}
+									else {
+										console.error('[ambience.js] : Error querying table : ' + err.stack);
+										res.render('errorPage.ejs', {message: 'Unable to query database at this time'});
+										return;
+									}
+								});
 							}
 							else {
-								console.error('[PriceRange.js] : Error querying table : ' + err.stack);
+								console.error('[ambience.js] : Error querying table : ' + err.stack);
 								res.render('errorPage.ejs', {message: 'Unable to query database at this time'});
 								return;
 							}
 						});
-						connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.state = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_classy = '1'", function(err, results2, fields) {
-							if (!err) {
-								classy_restaurants = results2.length;
-							}
-							else {
-								console.error('[PriceRange.js] : Error querying table : ' + err.stack);
-								res.render('errorPage.ejs', {message: 'Unable to query database at this time'});
-								return;
-							}
-						});
-						connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.state = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_touristy = '1'", function(err, results3, fields) {
-							if (!err) {
-								touristy_restaurants = results3.length;
-							}
-							else {
-								console.error('[PriceRange.js] : Error querying table : ' + err.stack);
-								res.render('errorPage.ejs', {message: 'Unable to query database at this time'});
-								return;
-							}
-						});
-						connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.state = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_hipster = '1'", function(err, results4, fields) {
-							if (!err) {
-								hipster_restaurants = results4.length;
-							}
-							else {
-								console.error('[PriceRange.js] : Error querying table : ' + err.stack);
-								res.render('errorPage.ejs', {message: 'Unable to query database at this time'});
-								return;
-							}
-						});
-						connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.state = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_trendy = '1'", function(err, results5, fields) {
-							if (!err) {
-								trendy_restaurants = results5.length;
-							}
-							else {
-								console.error('[PriceRange.js] : Error querying table : ' + err.stack);
-								res.render('errorPage.ejs', {message: 'Unable to query database at this time'});
-								return;
-							}
-						});
-						connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.state = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_intimate = '1'", function(err, results6, fields) {
-							if (!err) {
-								intimate_restaurants = results6.length;
-							}
-							else {
-								console.error('[PriceRange.js] : Error querying table : ' + err.stack);
-								res.render('errorPage.ejs', {message: 'Unable to query database at this time'});
-								return;
-							}
-						});
-						connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.state = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_casual = '1'", function(err, results7, fields) {
-							if (!err) {
-								casual_restaurants = results7.length;
-							}
-							else {
-								console.error('[PriceRange.js] : Error querying table : ' + err.stack);
-								res.render('errorPage.ejs', {message: 'Unable to query database at this time'});
-								return;
-							}
-						});
-						connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.state = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_romance = '1'", function(err, results8, fields) {
-							if (!err) {
-								romance_restaurants = results8.length;
-							}
-							else {
-								console.error('[PriceRange.js] : Error querying table : ' + err.stack);
-								res.render('errorPage.ejs', {message: 'Unable to query database at this time'});
-								return;
-							}
-						});
-						connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.state = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_upscale = '1'", function(err, results9, fields) {
-							if (!err) {
-								upscale_restaurants = results9.length;
-							}
-							else {
-								console.error('[PriceRange.js] : Error querying table : ' + err.stack);
-								res.render('errorPage.ejs', {message: 'Unable to query database at this time'});
-								return;
-							}
-						});
-						var divey_r = divey_restaurants/total_restaurants;
-						var classy_r = classy_restaurants/total_restaurants;
-						var touristy_r = touristy_restaurants/total_restaurants;
-						var hipster_r = hipster_restaurants/total_restaurants;
-						var trendy_r = trendy_restaurants/total_restaurants;
-						var intimate_r = intimate_restaurants/total_restaurants;
-						var casual_r = casual_restaurants/total_restaurants;
-						var romance_r = romance_restaurants/total_restaurants;
-						var upscale_r = upscale_restaurants/total_restaurants;
-						res.render('ambiencePage.ejs', {message: 'not saved', divey: divey_r, classy: classy_r, touristy: touristy_r, hipster: hipster_r, trendy: trendy_r, intimate: intimate_r, casual: casual_r, romance: romance_r, upscale: upscale_r});
-						return;
 					}
 					else {
-						console.error('[PriceRange.js] : Error querying table : ' + err.stack);
+						console.error('[ambience.js] : Error querying table : ' + err.stack);
 						res.render('errorPage.ejs', {message: 'Unable to query database at this time'});
 						return;
 					}
 				});
 			}
 			else {
-				console.error('[PriceRange.js] : Error querying table : ' + err.stack);
+				console.error('[ambience.js] : Error querying table : ' + err.stack);
 				res.render('errorPage.ejs', {message: 'Unable to query database at this time'});
 				return;
 			}

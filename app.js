@@ -83,6 +83,18 @@ var authenticate = function (req, res, next) {
   }
 }
 
+var yelp = require("yelp").createClient({
+  consumer_key: "wMfCFcqTj2FLaybsGPzytQ", 
+  consumer_secret: "7U5KhSvKp0evucyb5-ltXtwEW68",
+  token: "Hu_4wJgfcjPrhrObMvqYyddAlQkJ-yD2",
+  token_secret: "t_S08LdIEw5v6-Yw-dJXQiZXUh4"
+});
+
+yelp.search({sort: "2", limit: "2", location: "Philadelphia", category_filter: "isps"}, function(error, data) {
+  //console.log(data.businesses);
+});
+
+
 app.use('/', routes);
 app.post('/authentication', authentication.authenticate);
 app.post('/register', register.register);
