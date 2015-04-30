@@ -10,22 +10,21 @@ password : config.db_password,
 database : config.db_database
 };
 
-function store_categories(req, res, categories) {
+function save_plan(req, res, planname) {
+	//Get username from the login session
 	var email = req.session.email;
-	var plan_name = req.session.plan_name;
+	req.session.plan_name = planname;
 	var time = new Date();
-	categories = categories.substring(0, categories.length - 1);
 	var connection_pool = mysql.createPool(connection_data);
 	connection_pool.getConnection(function(err, connection) {
 		if (err) {
-			console.error('[storecategories.js] : Error connecting to database : ' + err.stack);
+			console.error('[saveplan.js] : Error connecting to database : ' + err.stack);
 			res.render('errorPage.ejs', {message: 'unable to connect to database at this time'});
 			return;
 		}
-		connection.query("update Customer_plans set categories = '"+ categories +"', last_modified = '"+ time +"' where email = '"+ email +"' and plan_name = '"+ plan_name +"'", function(err, rows, fields) {
+		connection.query("insert into Customer_plans(email, plan_name, last_modfified) values ('"+ email +"','"+ planname +"','"+ time +"')", function(err, rows, fields) {
 			if (!err) {
-				res.redirect('/locationpage');
-				return;
+				res.redirect('/showcategories?plan_name='+encodeURIComponent(planname));
 			}
 			else {
 				res.render('errorPage.ejs', {message: 'unable to connect to database at this time'});
@@ -36,6 +35,7 @@ function store_categories(req, res, categories) {
 	});
 }
 
-exports.store = function(req, res){
-	store_categories(req, res, req.query.categories);
+
+exports.save = function(req, res){
+	save_plan(req, res, req.query.planname);
 };

@@ -23,13 +23,18 @@ router.get('/locationpage',function(req, res, next) {
   res.render('locationPage.ejs');
 });
 
+router.get('/showplan',function(req, res, next) {
+  res.render('planNamePage.ejs', {name: req.session.name});
+});
+
 router.get('/logout', function(req, res, next) {
   req.session.destroy();
   res.render('welcomePage.ejs', {message: 'logged out'});	
 });
 
-router.get('/sample',function(req, res, next) {
-   var code = qr.image("https://www.sidebyside-cis450.herokuapp.com", { type: 'svg' });
+router.get('/qr/:code',function(req, res, next) {
+   console.log(req.params.code);
+   var code = qr.image("Your verification code is "+req.params.code, { type: 'svg' });
    res.type('svg');
    code.pipe(res);
 });

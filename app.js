@@ -24,6 +24,7 @@ var delivery = require('./routes/delivery');
 var parking = require('./routes/parking');
 var categories = require('./routes/categories');
 var storecategories = require('./routes/storecategories');
+var saveplan = require('./routes/saveplan');
 
 var app = express();
 
@@ -87,8 +88,11 @@ app.post('/authentication', authentication.authenticate);
 app.post('/register', register.register);
 app.get('/mobileVerification', authenticate, verification.verify);
 app.get('/homepage', authenticate, homepage.home);
+app.get('/saveplan', authenticate, saveplan.save);
 app.get('/pricerange', authenticate, pricerange.show);
+app.get('/savepricerange', authenticate, pricerange.save);
 app.get('/ambience', authenticate, ambience.show);
+app.get('/saveambience', authenticate, ambience.save);
 app.get('/goodfor', authenticate, goodfor.show);
 app.get('/wifi', authenticate, wifi.show);
 app.get('/alcohol', authenticate, alcohol.show);

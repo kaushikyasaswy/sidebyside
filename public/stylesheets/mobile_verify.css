@@ -12,16 +12,3 @@ h1 {
 	padding-bottom: 15px;
 }
 
-p {
-	font-weight: lighter!important;
-	font-size: 14pt;
-	padding-bottom: 10px;
-}
-
-#qrcode {
-	max-width: 100px;
-	width: 100px;
-	max-height: 100px;
-	height: 100px;
-	background-color: red;
-}

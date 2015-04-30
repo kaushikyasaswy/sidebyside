@@ -50,7 +50,7 @@ function register(req, res, email, firstname, lastname, password, phone) {
 						if (!err) {
 							req.session.email = email;
 							req.session.name = firstname;
-							res.render('mobileVerification.ejs', {message: 'welcome'});
+							res.render('mobileVerification.ejs', {message: 'welcome', code: code});
 							return;
 						}
 						else {

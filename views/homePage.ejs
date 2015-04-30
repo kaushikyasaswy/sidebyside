@@ -14,7 +14,7 @@
 <body>
 	<div id="main">
 		<div id="header">
-			<a href="/"><img src="/images/sidebysidelogo_header.svg" alt=""></a>
+			<a href="/homepage"><img src="/images/sidebysidelogo_header.svg" alt=""></a>
 			<div id="header_options">
 				<a href="" class="user_element"><img id="user_icon" src="/images/user168.svg" alt="">    <%= name %></a>
 				<a href="logout" class="user_element"><img id="logout_icon" src="/images/logout21.svg" alt=""></a>
@@ -25,9 +25,9 @@
 				<h1>Welcome, <%= name %></h1>
 				<% if (message == "registration success") { %>
 				<p>Thank you for registering with us. This is your dashboard. You can create new business plans from here and view previously saved plans.</p>
-				<button onclick="location.href = '/showcategories';" type="submit" id="create_new_plan" class="btn btn-default">+ Create New Plan</button>		
+				<button onclick="location.href = '/showplan';" type="submit" id="create_new_plan" class="btn btn-default">+ Create New Plan</button>		
 				<% } else if (message == "display homepage") { %>
-				<button onclick="location.href = '/showcategories';" type="submit" id="create_new_plan" class="btn btn-default">+ Create New Plan</button>
+				<button onclick="location.href = '/showplan';" type="submit" id="create_new_plan" class="btn btn-default">+ Create New Plan</button>
 				<div id="subtitle">
 					<h3>Saved business plans</h3>
 				</div>
@@ -41,7 +41,7 @@
 								<td class="col">
 									<div class="business_name"><a href='plans/<%= plans[i-1].plan_name %>'>
 										<%= plans[i-1].plan_name %>
-										</a>
+										</a> 
 									</div>
 									<div class="date_created"><%= plans[i-1].last_modified %>
 									</div>

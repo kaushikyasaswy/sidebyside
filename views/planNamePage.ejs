@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Side by Side</title>
+	<link rel="stylesheet" href="/stylesheets/global.css">
+	<link rel="stylesheet" href="/stylesheets/name_business.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+</head>
+<body>
+	<div id="main">
+		<div id="header">
+			<a href="/homepage"><img src="/images/sidebysidelogo_header.svg" alt=""></a>
+			<div id="header_options">
+				<a href="" class="user_element"><img id="user_icon" src="/images/user168.svg" alt="">    <%= name %></a>
+				<a href="logout" class="user_element"><img id="logout_icon" src="/images/logout21.svg" alt=""></a>
+			</div>
+		</div>	
+		<div id="content">
+			<div id="center_container">
+
+				<h1>Enter your business name</h1>
+				
+				<form action="saveplan" method="get" class="verify-form">
+				  	<div class="form-group">
+				    	<input type="input" class="form-control" id="code" name="planname" placeholder="Name">
+				 	</div>
+				 
+				 	<button type="submit" class="btn btn-default">Submit</button>
+				</form>
+
+			</div>
+		</div>
+
+		
+		<div id="footer"></div>
+	</div>
+</body>
+</html>

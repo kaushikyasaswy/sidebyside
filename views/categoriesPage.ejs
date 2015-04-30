@@ -15,15 +15,15 @@
 <body>
 	<div id="main">
 		<div id="header">
-			<a href="homepage.html"><img src="/images/sidebysidelogo_header.svg" alt=""></a>
+			<a href="/homepage"><img src="/images/sidebysidelogo_header.svg" alt=""></a>
 			<div id="header_options">
 				<a href="" class="user_element"><img id="user_icon" src="/images/user168.svg" alt="">    <%= name %></a>
-				<a href="" class="user_element"><img id="logout_icon" src="/images/logout21.svg" alt=""></a>
+				<a href="logout" class="user_element"><img id="logout_icon" src="/images/logout21.svg" alt=""></a>
 			</div>
 		</div>	
 		
 		<div id="content">
-			<h1>Name of the new business plan</h1>
+			<h1><%= plan_name %></h1>
 			<div class="element" id ="submit_button" onclick="addSelect(this)">
 				<button type="submit" id="submit_categories" class="btn btn-default" onclick="getCategories()">Submit categories</button>	
 			</div>

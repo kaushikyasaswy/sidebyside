@@ -115,10 +115,34 @@ function show(req, res, email, plan) {
 	});
 }
 
+function save(req, res, email, plan_name, price_range) {
+	var time = new Date();
+	var connection_pool = mysql.createPool(connection_data);
+	connection_pool.getConnection(function(err, connection) {
+		if (err) {
+			console.error('[PriceRange.js] : Error connecting to database : ' + err.stack);
+			res.render('errorPage.ejs', {message: 'unable to connect to database at this time'});
+			return;
+		}
+		else {
+			connection.query("update Customer_plans set price_range = '"+ price_range +"', last_modified = '"+ time +"' where email='" + email + "' and plan_name = '"+ plan_name +"'", function(err, rows, fields) {
+			if (!err) {
+				res.render('/ambience');
+				return;
+			}
+			else {
+				console.error('[PriceRange.js] : Error connecting to database : ' + err.stack);
+				res.render('errorPage.ejs', {message: 'unable to connect to database at this time'});
+				return;
+			}
+		}
+	});
+}
+
 exports.show = function(req, res){
 	show(req, res, req.session.email, req.session.plan);
 };
 
 exports.save = function(req, res){
-	save(); //Get values from post request and store in the database
+	save(req, res, req.session.email, req.session.plan, req.query.choice); //Get values from post request and store in the database
 };
