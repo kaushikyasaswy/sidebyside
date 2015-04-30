@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Side by Side</title>
+  <link rel="stylesheet" href="/stylesheets/global.css">
+  <link rel="stylesheet" href="/stylesheets/login.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <a href="/"><img src="/images/sidebysidelogo_header.svg" alt=""></a>
+      <a href="registerpage" id="header_register">New user? Register here</a>
+    </div>  
+    <div id="content">
+      <div id="center_container">
+        <% if (message == "logged out") { %>
+        <h3>You have successfully logged out!</h3> 
+        <% } %>
+        <h1 id="signin_header">Sign In</h1>
+        <form action="authentication" method="post">
+          <div class="form-group">
+            <% if (message == "username does not exist") { %>
+              <p class="error_message">Account for the given email doesnt exist. Please try again!</p>
+              <% } %>
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" name="email" placeholder="Enter email">
+          </div>
+          <div class="form-group">
+            <% if (message == "wrong password") { %>
+              <p class="error_message">Wrong Password. Please try again!</p>
+              <% } %>
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password">
+          </div>
+          <button type="submit" class="btn btn-default">Login</button>
+          <a href="registerpage" id="register">Register new user</a>
+        </form>         
+      </div>
+    </div>
+    <div id="footer"></div>
+  </div>
+</body>
+</html>

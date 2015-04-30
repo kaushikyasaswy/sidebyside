@@ -1,0 +1,88 @@
+#center_container{
+	position: fixed;
+	top: 25%;
+	left: 46%;
+	margin-top: -50px;
+	margin-left: -140px;
+	width: 850px;
+	height: 300px;
+}
+
+
+
+#signin_header {
+	padding-bottom: 20px;
+}
+
+
+ #register {
+	padding-bottom: 15px;
+}
+
+.form-control:focus {
+	border-color: #AE1E23!important;
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(174,30,35,.6)!important;
+}
+
+#header_register {
+	float: right;
+	padding-right: 50px;
+	padding-top: 15px;
+	color: white;
+	font-size: 10pt;
+}
+
+#header_register:hover {
+	color: white;
+}
+
+.name_box {
+	float: left;
+}
+
+.user_create {
+	float: left;
+	padding: 0;
+}
+
+#firstname, #lastname{
+	width: 250px;
+	margin-right: 10px;
+}
+
+#password, #confirmpassword {
+	width: 510px;
+	margin-right: 10px;
+}
+
+#username {
+	width: 300px;
+}
+
+.email_box {
+	float: left;
+}
+
+#email {
+	width: 510px;
+}
+
+#confirmemail {
+	width: 450px;
+}
+
+.email_conf {
+	float: left;
+}
+
+.password_box {
+	float: left;
+}
+
+#phone {
+	width: 300px;
+}
+
+#user_warning {
+	margin-left: 10px;
+}

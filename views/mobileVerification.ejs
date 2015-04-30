@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Side by Side</title>
+	<link rel="stylesheet" href="/stylesheets/global.css">
+	<link rel="stylesheet" href="/stylesheets/mobile_verify.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+</head>
+<body>
+	<div id="main">
+		<div id="header">
+			<a href="/"><img src="/images/sidebysidelogo_header.svg" alt=""></a>
+			<a href="registerpage" id="header_register">Existing user? Log in here</a>
+		</div>	
+		<div id="content">
+			<div id="center_container">
+				<h1>Verification Code</h1>
+				<% if (message == "welcome") { %>
+        			<p>A verification code has been sent to you mobile and to your email. You can also scan the QR code below to obtain your code. Please enter the code below to verify your account.</p>
+        		<% } else if (message == "something went wrong") { %>
+					<p>Something went wrong. Try again</p>
+					<% } else if (message == "verification pending") { %>
+					<p>You need to verify your account before you can proceed. Please enter the verification code</p>
+					<% } else if (message == "wrong code") { %>
+					<p>The code you entered is wrong. Try again</p>
+					<% } %>	
+				<form action="mobileVerification" method="get" class="verify-form">
+					<div class="form-group">
+				    	<input type="input" class="form-control" id="code" name="code" placeholder="Verification Code">
+				 	</div>
+				 	<div class="form-group">
+				    	<img id="qrcode" src="">
+				 	</div>
+				 	<button type="submit" class="btn btn-default">Submit</button>
+				</form>
+			</div>
+		</div>
+		<div id="footer"></div>
+	</div>
+</body>
+</html>

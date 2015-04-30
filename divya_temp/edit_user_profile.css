@@ -1,0 +1,9 @@
+#center_container{
+	position: fixed;
+	top: 20%;
+	left: 30%;
+	margin-top: -50px;
+	margin-left: -210px;
+	width: 1000px;
+	height: 320px;
+}

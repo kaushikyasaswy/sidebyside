@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Side by Side</title>
+	<link rel="stylesheet" href="global.css">
+	<link rel="stylesheet" href="mobile_verify.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+</head>
+<body>
+	<div id="main">
+		<div id="header">
+			<a href="homepage.html"><img src="sidebysidelogo_header.svg" alt=""></a>
+			<a href="register.html" id="header_register">Existing user? Log in here</a>
+		</div>	
+		<div id="content">
+			<div id="center_container">
+
+				<h1>Mobile Verification Code</h1>
+				<form action="mobileVerification" method="get" class="verify-form">
+					<% if (message == "welcome") { %>
+        			<h3>Enter the verification code sent to your mobile device.</h3>
+			        <% } else if (message == "something went wrong") { %>
+					<h3>Something went wrong. Try again</h3>
+					<% } else if (message == "verification pending") { %>
+					<h3>You need to verify your accound before you can proceed. Please enter the verification code</h3>
+					<% } else if (message == "wrong code") { %>
+					<h3>The code you entered is wrong. Try again</h3>
+					<% } %>
+				  	<div class="form-group">
+				    	<input type="input" class="form-control" id="code" name="code" placeholder="Verification Code">
+				 	</div>
+				 
+				 	<button type="submit" class="btn btn-default">Submit</button>
+				</form>
+			</div>
+		</div>
+
+		
+		<div id="footer"></div>
+	</div>
+</body>
+</html>

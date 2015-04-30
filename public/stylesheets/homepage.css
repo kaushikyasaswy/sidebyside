@@ -1,0 +1,25 @@
+#center_container{
+	position: fixed;
+	top: 45%;
+	left: 46%;
+	margin-top: -50px;
+	margin-left: -210px;
+	width: 500px;
+	height: 300px;
+}
+
+#center_container img {
+	width: 600px;
+}
+
+.option {
+	padding-left: 110px;
+	padding-top: 30px;
+}
+
+.btn.btn-default {
+	border-color: #ffffff!important;
+	background-color: transparent;
+	color: white;
+}
+

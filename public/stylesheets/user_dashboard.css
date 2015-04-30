@@ -1,0 +1,86 @@
+#center_container{
+	position: fixed;
+	top: 20%;
+	left: 30%;
+	margin-top: -50px;
+	margin-left: -210px;
+	width: 1000px;
+	height: 320px;
+}
+
+
+h3 {
+	padding-left: 10px;
+}
+
+#subtitle {
+	-webkit-box-shadow: 0px 1px 21px -2px rgba(0,0,0,0.46);
+	-moz-box-shadow: 0px 1px 21px -5px rgba(0,0,0,0.46);
+	box-shadow: 0px 1px 21px -5px rgba(0,0,0,0.46);
+	height: 50px;
+}
+
+h3 {
+	vertical-align: middle;
+	line-height: 2.1!important;
+}
+
+#saved_plans {
+	width: 100%;
+	height: 100%;
+	overflow: scroll;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.row {
+	width: 100%;
+
+}
+
+.col {
+	height: 200px;
+	width: 33%;
+	border-radius: 15px;
+	border: 1px solid #cccccc;
+	padding-left: 15px;
+}
+
+.business_name {
+	font-size: 14pt;
+}
+
+.date_created {
+	font-size: 10pt;
+	color: #999999;
+}
+
+.btn.btn-default.edit {
+	margin-top: 30px;
+	border-color: #1eaea9;
+	background-color: #1eaea9;
+	color: white;
+	float: left;
+	margin-right: 20px;
+}
+
+
+.btn.btn-default.view {
+	margin-top: 30px;
+	border-color: #090958;
+	background-color: #090958;
+	color: white;
+	float: left;
+	margin-right: 20px;
+}
+
+#create_new_plan {
+	background-color: #AE1E23!important;
+	border-color: #AE1E23!important;
+	color: white;
+}
+
+
