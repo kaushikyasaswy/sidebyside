@@ -14,15 +14,17 @@ function save_plan(req, res, planname) {
 	//Get username from the login session
 	var email = req.session.email;
 	req.session.plan_name = planname;
+	req.session.plan = planname;
+	req.session.planname = planname;
 	var time = new Date();
 	var connection_pool = mysql.createPool(connection_data);
 	connection_pool.getConnection(function(err, connection) {
 		if (err) {
 			console.error('[saveplan.js] : Error connecting to database : ' + err.stack);
-			res.render('errorPage.ejs', {message: 'unable to connect to database at this time'});
+			res.render('errorPage.ejs', {message: 'Error here unable to connect to database at this time'});
 			return;
 		}
-		connection.query("insert into Customer_plans(email, plan_name, last_modfified) values ('"+ email +"','"+ planname +"','"+ time +"')", function(err, rows, fields) {
+		connection.query("insert into Customer_plans(email, plan_name, last_modified) values ('"+ email +"','"+ planname +"','"+ time +"')", function(err, rows, fields) {
 			if (!err) {
 				res.redirect('/showcategories?plan_name='+encodeURIComponent(planname));
 			}

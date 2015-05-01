@@ -15,6 +15,7 @@ var authentication = require('./routes/authentication');
 var register = require('./routes/register');
 var verification = require('./routes/mobileVerification');
 var homepage = require('./routes/homePage');
+var getcities = require('./routes/getcities');
 var pricerange = require('./routes/priceRange');
 var ambience = require('./routes/ambience');
 var goodfor = require('./routes/goodfor');
@@ -27,6 +28,8 @@ var finalpage = require('./routes/finalpage');
 var categories = require('./routes/categories');
 var storecategories = require('./routes/storecategories');
 var saveplan = require('./routes/saveplan');
+var localitypage = require('./routes/localitypage');
+var newlocalitypage = require('./routes/newlocalitypage');
 
 var app = express();
 
@@ -102,6 +105,9 @@ app.post('/authentication', authentication.authenticate);
 app.post('/register', register.register);
 app.get('/mobileVerification', authenticate, verification.verify);
 app.get('/homepage', authenticate, homepage.home);
+app.get('/getcities', authenticate, getcities.showcities);
+app.get('/localitypage', authenticate, localitypage.showlocations);
+app.get('/newlocalitypage', authenticate, newlocalitypage.showlocations);
 app.get('/saveplan', authenticate, saveplan.save);
 app.get('/pricerange', authenticate, pricerange.show);
 app.get('/savepricerange', authenticate, pricerange.save);
@@ -118,7 +124,7 @@ app.get('/takeout', authenticate, takeout.show);
 app.get('/savetakeout', authenticate, takeout.save);
 app.get('/parking', authenticate, parking.show);
 app.get('/saveparking', authenticate, parking.save);
-app.get('finalpage', authenticate, finalpage.show);
+app.get('/finalpage', authenticate, finalpage.show);
 app.get('/showcategories', authenticate, categories.show);
 app.get('/storecategories', authenticate, storecategories.store);
 

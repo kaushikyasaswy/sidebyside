@@ -47,7 +47,7 @@ function show(req, res, email, plan) {
 				var total_restaurants = 0;
 				var with_wifi = 0;
 				var without_wifi = 0;
-				connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id where business.city = '"+city+"' and business.State = '"+state+"' and Categories.category REGEXP "+str, function(err, results, fields) {
+				connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id where business.city = '"+city+"' and business.State = '"+state+"' and Categories.category REGEXP "+str+" and (Attributes.wifi = '0' or Attributes.wifi = '1')", function(err, results, fields) {
 					if (!err) {
 						total_restaurants = results.length;
 										connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.State = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.wifi = '0'", function(err, results1, fields) {

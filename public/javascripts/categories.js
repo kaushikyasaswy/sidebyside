@@ -29,6 +29,6 @@ function getCategories() {
 		var innerText = selected[i].innerText.trim();
 		text = text.concat(innerText,';');
 	}
-	console.log(text);
+	location.href = "/storecategories?categories="+text;
 }
 

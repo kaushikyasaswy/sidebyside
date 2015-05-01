@@ -28,8 +28,7 @@ function show(req, res, email, plan) {
 				var state = rows[0].State;
 				var location = rows[0].location;
 				var categories = rows[0].categories;
-				categories = categories.substring(0, categories.length - 1);
-				
+				//remove last char
 			}
 			else {
 				console.error('[FinalPage.js] : Error querying table : ' + err.stack);

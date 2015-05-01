@@ -16,7 +16,7 @@
 
 			AmCharts.ready(function() {
 			    map = new AmCharts.AmMap();
-			    map.pathToImages = "";
+			    map.pathToImages = "/images/";
 
 			    map.colorSteps = 1;
 
@@ -189,6 +189,47 @@
 			    // map.valueLegend = valueLegend;
 
 			    map.write("mapdiv");
+
+			    map.addListener("clickMapObject", function (event) {
+			    	var node = document.getElementById("cities");
+					while (node.firstChild) {
+					    node.removeChild(node.firstChild);
+					}
+			    	var location = (event.mapObject.id);
+			    	state = location.replace("US-", "");
+			    	var xmlhttp = new XMLHttpRequest();
+			    	var cities = [];
+			    	xmlhttp.open("GET","/getcities?state="+state,true);
+			    	xmlhttp.onreadystatechange=function() {
+				        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				        	cities=xmlhttp.responseText;
+				        	console.log(cities);
+				        	var flag = false;
+				        	var city = "";
+				        	for (var i=0; i<cities.length; i++) {
+				        		if (cities[i] == "\"" && flag == false) {
+				        			flag = true;
+				        			city = "";
+				        		}
+				        		else if (cities[i] == "\"" && flag == true) {
+				        			var ul = document.getElementById("cities");
+									var li = document.createElement("li");
+									var aTag = document.createElement("a");
+									aTag.setAttribute('href',"/localitypage?city="+city);
+									aTag.innerHTML = city;
+									li.appendChild(aTag);
+									ul.appendChild(li);
+				        			city = "";
+				        			flag = false;
+				        		}
+				        		else if (flag == true) {
+				        			city += cities[i];
+				        		}
+				        	}
+				        }
+				    }
+					xmlhttp.send();
+				});	
 			});
 		</script>
     </head>
@@ -207,12 +248,7 @@
 		<nav id="primary_nav_wrap">
 			<ul id ="list">
 			  <li><a href="#">Cities</a>
-			    <ul>
-			      <li><a href="#">Sub Menu 1</a></li>
-			      <li><a href="#">Sub Menu 2</a></li>
-			      <li><a href="#">Sub Menu 3</a></li>
-			      <li><a href="#">Sub Menu 4</a></li>
-			      <li><a href="#">Sub Menu 5</a></li>
+			    <ul id = "cities">
 			    </ul>
 			  </li>
 			</ul>
@@ -220,7 +256,6 @@
 
         <div id="mapdiv" style="width: 100%; background-color:#EEEEEE; height: 450px;">
         </div>
-        <button type="submit" id="create_new_plan" class="btn btn-default">Find Neighborhoods >></button>	
         <div id="footer"></div>
     </body>
 

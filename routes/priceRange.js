@@ -155,7 +155,6 @@ function save(req, res, email, plan_name, price_range) {
 }
 
 exports.show = function(req, res){
-	req.session.plan = "chinese";
 	show(req, res, req.session.email, req.session.plan);
 };
 
