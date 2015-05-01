@@ -32,7 +32,7 @@ function show(req, res, email, plan) {
 					return;
 				}
 				var city = rows[0].city;
-				var state = rows[0].state;
+				var state = rows[0].State;
 				var categories = rows[0].categories;
 				var categories_array = categories.split(";");
 				var str = "'";
@@ -55,34 +55,34 @@ function show(req, res, email, plan) {
 				var casual_restaurants = 0;
 				var romance_restaurants = 0;
 				var upscale_restaurants = 0;
-				connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.state = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_divey = '1' or Attributes.ambience_classy = '1' or Attributes.ambience_touristy = '1' or Attributes.ambience_hipster = '1' or Attributes.ambience_trendy = '1' or Attributes.ambience_intimate = '1' or Attributes.ambience_casual = '1' or Attributes.ambience_romance = '1' or Attributes.ambience_upscale = '1'", function(err, results, fields) {
+				connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.State = '"+state+"' and Categories.category REGEXP "+str+" and (Attributes.ambience_divey = '1' or Attributes.ambience_classy = '1' or Attributes.ambience_touristy = '1' or Attributes.ambience_hipster = '1' or Attributes.ambience_trendy = '1' or Attributes.ambience_intimate = '1' or Attributes.ambience_casual = '1' or Attributes.ambience_romance = '1' or Attributes.ambience_upscale = '1')", function(err, results, fields) {
 					if (!err) {
 						total_restaurants = results.length;
-						connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.state = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_divey = '1'", function(err, results1, fields) {
+						connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.State = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_divey = '1'", function(err, results1, fields) {
 							if (!err) {
 								divey_restaurants = results1.length;
-								connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.state = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_classy = '1'", function(err, results2, fields) {
+								connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.State = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_classy = '1'", function(err, results2, fields) {
 									if (!err) {
 										classy_restaurants = results2.length;
-										connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.state = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_touristy = '1'", function(err, results3, fields) {
+										connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.State = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_touristy = '1'", function(err, results3, fields) {
 											if (!err) {
 												touristy_restaurants = results3.length;
-												connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.state = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_hipster = '1'", function(err, results4, fields) {
+												connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.State = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_hipster = '1'", function(err, results4, fields) {
 													if (!err) {
 														hipster_restaurants = results4.length;
-														connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.state = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_trendy = '1'", function(err, results5, fields) {
+														connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.State = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_trendy = '1'", function(err, results5, fields) {
 															if (!err) {
 																trendy_restaurants = results5.length;
-																connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.state = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_intimate = '1'", function(err, results6, fields) {
+																connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.State = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_intimate = '1'", function(err, results6, fields) {
 																	if (!err) {
 																		intimate_restaurants = results6.length;
-																		connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.state = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_casual = '1'", function(err, results7, fields) {
+																		connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.State = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_casual = '1'", function(err, results7, fields) {
 																			if (!err) {
 																				casual_restaurants = results7.length;
-																				connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.state = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_romance = '1'", function(err, results8, fields) {
+																				connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.State = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_romance = '1'", function(err, results8, fields) {
 																					if (!err) {
 																						romance_restaurants = results8.length;
-																						connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.state = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_upscale = '1'", function(err, results9, fields) {
+																						connection.query("select distinct business.business_id from business inner join Categories on business.business_id = Categories.business_id inner join Attributes on business.business_id = Attributes.business_id where business.city = '"+city+"' and business.State = '"+state+"' and Categories.category REGEXP "+str+" and Attributes.ambience_upscale = '1'", function(err, results9, fields) {
 																							if (!err) {
 																								upscale_restaurants = results9.length;
 																								var divey_r = divey_restaurants/total_restaurants;
@@ -94,7 +94,7 @@ function show(req, res, email, plan) {
 																								var casual_r = casual_restaurants/total_restaurants;
 																								var romance_r = romance_restaurants/total_restaurants;
 																								var upscale_r = upscale_restaurants/total_restaurants;
-																								yelp.search({sort: "2", limit: "5", location: "Philadelphia", category_filter: "isps"}, function(error, data) {
+																								yelp.search({sort: "2", limit: "5", location: "Philadelphia", category_filter: "interiordesign"}, function(error, data) {
 																								    var businesses = [];
 																									for (var i=0; i < 5; i++) {
 																										var name = data.businesses[i].name;
@@ -187,10 +187,66 @@ function show(req, res, email, plan) {
 	});
 }
 
+function save(req, res, email, plan_name, index) {
+	var time = new Date();
+	index = parseInt(index, 10);
+	console.log('Index is '+index);
+	var query = "";
+	if (index == 0) {
+		query = "update Customer_plans set ambience_divey = '1', last_modified = '"+ time +"' where email='" + email + "' and plan_name = '"+ plan_name +"'";
+	}
+	else if (index == 1) {
+		query = "update Customer_plans set ambience_classy = '1', last_modified = '"+ time +"' where email='" + email + "' and plan_name = '"+ plan_name +"'";
+	}
+	else if (index == 2) {
+		query = "update Customer_plans set ambience_touristy = '1', last_modified = '"+ time +"' where email='" + email + "' and plan_name = '"+ plan_name +"'";
+	}
+	else if (index == 3) {
+		query = "update Customer_plans set ambience_hipster = '1', last_modified = '"+ time +"' where email='" + email + "' and plan_name = '"+ plan_name +"'";
+	}
+	else if (index == 4) {
+		query = "update Customer_plans set ambience_trendy = '1', last_modified = '"+ time +"' where email='" + email + "' and plan_name = '"+ plan_name +"'";
+	}
+	else if (index == 5) {
+		query = "update Customer_plans set ambience_intimate = '1', last_modified = '"+ time +"' where email='" + email + "' and plan_name = '"+ plan_name +"'";
+	}
+	else if (index == 6) {
+		query = "update Customer_plans set ambience_casual = '1', last_modified = '"+ time +"' where email='" + email + "' and plan_name = '"+ plan_name +"'";
+	}
+	else if (index == 7) {
+		query = "update Customer_plans set ambience_romance = '1', last_modified = '"+ time +"' where email='" + email + "' and plan_name = '"+ plan_name +"'";
+	}
+	else if (index == 8) {
+		query = "update Customer_plans set ambience_upscale = '1', last_modified = '"+ time +"' where email='" + email + "' and plan_name = '"+ plan_name +"'";
+	}
+	var connection_pool = mysql.createPool(connection_data);
+	connection_pool.getConnection(function(err, connection) {
+		if (err) {
+			console.error('[ambience.js] : Error connecting to database : ' + err.stack);
+			res.render('errorPage.ejs', {message: 'unable to connect to database at this time'});
+			return;
+		}
+		else {
+			connection.query(query, function(err, rows, fields) {
+				if (!err) {
+					res.redirect('/wifi');
+					return;
+				}
+				else {
+					console.error('[ambience.js] : Error connecting to database : ' + err.stack);
+					res.render('errorPage.ejs', {message: 'unable to connect to database at this time'});
+					return;
+				}
+			});
+		}
+	});
+}
+
 exports.show = function(req, res){
 	show(req, res, req.session.email, req.session.plan);
 };
 
 exports.save = function(req, res){
-	save(); //Get values from post request and store in the database
+	console.log('SAVE');
+	save(req, res, req.session.email, req.session.plan, req.query.choice);
 };

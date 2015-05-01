@@ -1,54 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Side by Side</title>
-	<link rel="stylesheet" href="/stylesheets/global.css">
-	<link rel="stylesheet" href="/stylesheets/ambiance.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-	<script type="text/javascript" src="/javascripts/jquery-1.9.1.min.js"></script>
-	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <meta charset="UTF-8">
+    <title>Side by Side</title>
+    <link rel="stylesheet" href="/stylesheets/global.css">
+    <link rel="stylesheet" href="/stylesheets/takeout.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script type="text/javascript" src="/javascripts/jquery-1.9.1.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 </head>
 
 <body>
-	<div id="main">
-		<div id="header">
-			<a href="/homepage"><img src="/images/sidebysidelogo_header.svg" alt=""></a>
-			<div id="header_options">
-				<a href="" class="user_element"><img id="user_icon" src="/images/user168.svg" alt="">    <%= name %></a>
-				<a href="/logout" class="user_element"><img id="logout_icon" src="/images/logout21.svg" alt=""></a>
-			</div>
-		</div>	
-		
-		<h1><%= plan %></h1>
-		<h3>The succes rate for various ambiances is shown below. Choose the ambiance for your restaurant.</h3>
+    <div id="main">
+        <div id="header">
+            <a href="/homepage"><img src="/images/sidebysidelogo_header.svg" alt=""></a>
+            <div id="header_options">
+                <a href="" class="user_element"><img id="user_icon" src="/images/user168.svg" alt="">    <%= name %></a>
+                <a href="/logout" class="user_element"><img id="logout_icon" src="/images/logout21.svg" alt=""></a>
+            </div>
+        </div>  
+        
+        <h1><%= plan %></h1>
+        <h3>The succes rate with having and without having takeout is shown below. Choose whether you wish to have takeout for your business.</h3>
 
 		
 		<div id="content">
 			<div class="content_element" id="suggested_providers">
-				<p id="suggested_providers_title">Interior Designers close to you</p>
+				<p id="suggested_providers_title">Suggested Providers</p>
 				<ul>
-					<% for(var i=0; i<5; i++) { %>
-					<li> 
-						<p class="provider_details"><b><%= businesses[i][0] %></b></p>
-						<p class="provider_details"><%= businesses[i][1] %></p>
-						<a class="provider_details" href="<%= businesses[i][2] %>">Link</a>
-					</li>
-					<% } %>
-				</ul>
+                    <% for(var i=0; i<5; i++) { %>
+                    <li> 
+                        <p class="provider_details"><b><%= businesses[i][0] %></b></p>
+                        <p class="provider_details"><%= businesses[i][1] %></p>
+                        <a class="provider_details" href="<%= businesses[i][2] %>">Link</a>
+                    </li>
+                    <% } %>
+                </ul>
 			</div>
 			<div class="content_element" id="statistics">
 				<section id="chart"></section>
-				<div id="images">
-					<p id="divey" class="ambiance_options">Divey</p>
-					<p id="classy" class="ambiance_options">Classy</p>
-					<p id="touristy" class="ambiance_options">Touristy</p>
-					<p id="hipster" class="ambiance_options">Hipster</p>	
-					<p id="trendy" class="ambiance_options">Trendy</p>							
-					<p id="intimate" class="ambiance_options">Intimate</p>	
-					<p id="casual" class="ambiance_options">Casual</p>	
-					<p id="romance" class="ambiance_options">Romance</p>
-					<p id="upscale" class="ambiance_options">Upscale</p>
+				<div>
+					<p class="wifi_options">No</p>
+					<p class="wifi_options" id="no">Yes</p>
 				</div>
 			</div>
 			
@@ -110,7 +103,7 @@ d3.select('#chart').append('svg')
 
    .on('click', function(d, i) {
        selected = i;
-       location.href = "/saveambience?choice="+selected;
+       location.href = "/savetakeout?choice="+selected;
     })
 
 var hAxis = d3.svg.axis()
