@@ -11,10 +11,10 @@ module.exports={
   "db_user"		  :	"",
   "db_password"		  :	"",
   "db_database"		  :	"",
-  "gmail_uname"           : "",
-  "gmail_pwd"             : "",
-  "yelp_consumer_key"	  :  "", 
-  "yelp_consumer_secret"  :  "",
-  "yelp_token"		  :  "",
-  "yelp_token_secret"	  :  ""
+  "gmail_uname"           :     "",
+  "gmail_pwd"             : 	"",
+  "yelp_consumer_key"	  :  	"", 
+  "yelp_consumer_secret"  :  	"",
+  "yelp_token"		  :  	"",
+  "yelp_token_secret"	  :  	""
 }
