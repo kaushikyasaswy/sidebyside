@@ -10,5 +10,7 @@ module.exports={
   "db_host"		  :	"startmeup.csnhsdifow1k.us-east-1.rds.amazonaws.com",
   "db_user"		  :	"startmeup",
   "db_password"		  :	"puemtrats",
-  "db_database"		  :	"project_yelp"
+  "db_database"		  :	"project_yelp",
+  "gmail_uname"     : "kaushikyasaswy1993@gmail.com",
+  "gmail_pwd"       : "Maryjane1993"
 }
