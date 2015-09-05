@@ -79,10 +79,10 @@ function random(low, high) {
 }
 
 function send_sms(code, phone) {
- 	var client = new twilio.RestClient('AC997603cf5760391f8e39ce90192a3acf', '628746f7ce96f53fa50bc232d5e59d62');
+ 	var client = new twilio.RestClient('<your sid>', '<your token>');
  	client.sms.messages.create({
     	to:'+1'+phone,
-    	from:'3017106565',
+    	from:'<your phone>',
     	body:'Verification Code for SidebySide: ' + code + '. Please enter this in the website to verify your account'
 	}, function(error, message) {
     if (!error) {
